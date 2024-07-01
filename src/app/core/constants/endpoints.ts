@@ -13,6 +13,8 @@ export const endpoints = {
 
   applications: host + 'applications',
 
-  addApplications: host + '/applications/addApplication'
+  addApplications: host + '/applications/addApplication',
+
+  myNotification: host + '/notifications/myNotifications'
 };
 

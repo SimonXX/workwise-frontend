@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CommonModule, DatePipe} from "@angular/common";
 import {JobOffersComponent} from "../../features/job-offers/job-offers.component";
 import {AuthService} from "../../core/services/auth.service";
+import {NotificationsComponent} from "../../features/notifications/notifications.component";
 
 @Component({
   selector: 'app-candidate-area',
@@ -9,7 +10,8 @@ import {AuthService} from "../../core/services/auth.service";
   imports: [
     DatePipe,
     CommonModule,
-    JobOffersComponent
+    JobOffersComponent,
+    NotificationsComponent
   ],
   templateUrl: './candidate-area.component.html',
   styleUrl: './candidate-area.component.css'

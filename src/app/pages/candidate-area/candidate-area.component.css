@@ -173,3 +173,11 @@
     }
   }
 }
+
+.notifications-sidebar {
+  width: 300px; /* Larghezza fissa della barra delle notifiche */
+  background-color: #f0f0f0; /* Colore di sfondo */
+  border-left: 1px solid #ccc; /* Bordo a sinistra */
+  padding: 20px; /* Spaziatura interna */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombra */
+}
