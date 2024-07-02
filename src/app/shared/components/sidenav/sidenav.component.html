@@ -1,0 +1,87 @@
+<div class="toolbar-container">
+  <mat-toolbar color="primary">
+    <div class="logo-container">
+      <span class="app-name">Your App</span>
+    </div>
+
+    <div class="header-button-container">
+      <button
+        mat-icon-button
+        *ngIf="mainArea"
+        (click)="showLeftSidenav = showRightSidenav = mainArea = false"
+      >
+        <mat-icon>fullscreen</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        *ngIf="!mainArea"
+        (click)="showLeftSidenav = showRightSidenav = mainArea = true"
+      >
+        <mat-icon>fullscreen_exit</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+</div>
+
+<div class="full-page">
+  <as-split
+    [useTransition]="true"
+    unit="percent"
+    [gutterSize]="10"
+    class="as-horizontal"
+  >
+    <as-split-area
+      [size]="30"
+      [order]="1"
+      [visible]="showLeftSidenav"
+      class="split-left"
+    >
+      <button
+        class="round-btn left"
+        (click)="showLeftSidenav = !showLeftSidenav"
+      ></button>
+
+      <div class="left-side-content-container">
+        <app-job-offers></app-job-offers>
+
+
+      </div>
+    </as-split-area>
+
+    <as-split-area
+      [size]="40"
+      [order]="2"
+      [visible]="true"
+      class="main-content"
+    >
+      <button
+        class="round-btn right"
+        (click)="showLeftSidenav = !showLeftSidenav"
+      ></button>
+      <button
+        class="round-btn left"
+        (click)="showRightSidenav = !showRightSidenav"
+      ></button>
+
+      <div class="page-container">
+      </div>
+    </as-split-area>
+    <as-split-area
+      [size]="30"
+      [order]="3"
+      [visible]="showRightSidenav"
+      class="split-right"
+    >
+      <button
+        class="round-btn right"
+        (click)="showRightSidenav = !showRightSidenav"
+      ></button>
+      <app-notifications></app-notifications>
+      <mat-accordion class="about-demo">
+        <div class="right-side-content-container">
+          <app-notifications></app-notifications>
+        </div>
+      </mat-accordion>
+    </as-split-area>
+  </as-split>
+</div>

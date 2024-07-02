@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Notification} from "../../core/models/notification.model";
-import {DatePipe, NgForOf, NgIf} from "@angular/common";
+import {DatePipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {NotificationsService} from "./services/notifications.service";
+import {ConfirmationDialogService} from "../../shared/components/confirm-dialog/service/confirmation-dialog.service";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmationDialogComponent} from "../../shared/components/confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'app-notifications',
@@ -9,7 +12,8 @@ import {NotificationsService} from "./services/notifications.service";
   imports: [
     DatePipe,
     NgForOf,
-    NgIf
+    NgIf,
+    NgClass
   ],
   templateUrl: './notifications.component.html',
   styleUrl: './notifications.component.css'
@@ -17,11 +21,11 @@ import {NotificationsService} from "./services/notifications.service";
 export class NotificationsComponent implements OnInit {
   notifications: Notification[] = []; // Array per contenere le notifiche
   currentPage = 0;
-  pageSize = 2;
+  pageSize = 3;
   totalPages = 0;
   searchText = '';
 
-  constructor(private notificationsService: NotificationsService) { }
+  constructor(private notificationsService: NotificationsService,  private dialog: MatDialog) { }
 
   ngOnInit(): void {
     // Simulazione di caricamento delle notifiche dal servizio o da una fonte dati
@@ -42,16 +46,66 @@ export class NotificationsComponent implements OnInit {
     this.notificationsService.getAllMyNotifications(this.currentPage, this.pageSize).subscribe(observer);
   }
 
-  markAsRead(notification: Notification): void {
-    // Simulazione di marcatura come letta
-    notification.isRead = true;
-    // Qui potresti voler aggiornare lo stato della notifica nel backend
+  markAsRead(notificationId: number): void {
+    this.notificationsService.markAsRead(notificationId).subscribe({
+      next: response => {
+        console.log('Notification marked as read:', response);
+        this.loadNotifications();
+      },
+      error: error => {
+        console.error('Error marking notification as read:', error);
+      }
+    });
+  }
+
+  markAsUnread(notificationId: number): void{
+    this.notificationsService.markUsUnread(notificationId).subscribe({
+      next: response =>{
+        console.log('Notification marked as unread: ', response);
+        this.loadNotifications();
+      },
+      error: error =>{
+        console.error('Error marking notification as unread: ', error);
+      }
+    })
+  }
+
+  deleteNotification(notificationId: number): void{
+    this.notificationsService.deleteNotification(notificationId).subscribe({
+      next: response =>{
+        console.log('Notification deleted: ', response);
+        this.loadNotifications();
+      },
+      error: error =>{
+        console.error('Error to delete notification: ', error);
+      }
+    })
   }
 
   clearNotifications(): void {
-    // Simulazione di cancellazione delle notifiche
-    this.notifications = [];
-    // Qui potresti voler chiamare il backend per cancellare tutte le notifiche
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '400px',
+      data: {
+        title: 'Delete Confirmation',
+        message: 'Do you want to delete all notifications?',
+        confirmText: 'Confirm',
+        cancelText: 'Cancel'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.notificationsService.deleteAllNotifications().subscribe({
+          next: response => {
+            console.log('All Notifications deleted: ', response);
+            this.loadNotifications();
+          },
+          error: error => {
+            console.error('Error to delete all notifications: ', error);
+          }
+        });
+      }
+    });
   }
 
   nextPage(): void {

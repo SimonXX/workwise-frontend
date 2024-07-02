@@ -18,4 +18,24 @@ export class NotificationsService {
 
     return this.http.get<PaginatedResponse<Notification>>(endpoints.myNotification, { params });
   }
+
+  markAsRead(notificationId: number): Observable<any> {
+    const url = `${endpoints.markAsReadNotification}/${notificationId}`; // Esempio di URL per segnare la notifica come letta
+    return this.http.put(url, null); // L'endpoint PUT richiede un body, anche se è null
+  }
+
+  markUsUnread(notificationId: number): Observable<any>{
+    const url = `${endpoints.markAsUnreadNotification}/${notificationId}`;
+    return this.http.put(url, null);
+  }
+
+  deleteNotification(notificationId: number): Observable<any>{
+    const url = `${endpoints.deleteNotification}/${notificationId}`;
+    return this.http.delete(url);
+  }
+
+  deleteAllNotifications(): Observable<any>{
+    const url = `${endpoints.deleteAllNotifications}`;
+    return this.http.delete(url);
+  }
 }
