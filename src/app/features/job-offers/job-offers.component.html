@@ -11,8 +11,9 @@
     />
 
     <span class="clear-search-icon" *ngIf="searchText" (click)="clearSearchText()">
-      X
+      <mat-icon>highlight_off</mat-icon>
     </span>
+
 
     <select [(ngModel)]="filterCriteria" class="filter-dropdown" (change)="applySearch()">
       <option value="id">ID</option>
@@ -31,8 +32,8 @@
           <p class="job-offer-description">{{ jobOffer.description }}</p>
           <p class="job-offer-location">Location: {{ jobOffer.location }}</p>
           <p class="job-offer-company">Company: {{ jobOffer.company.name }}</p>
-          <p class="job-offer-posted">Posted on: {{ jobOffer.postedDate | date }}</p>
-          <p class="job-offer-expires">Expires on: {{ jobOffer.expiryDate | date }}</p>
+          <p class="job-offer-posted">Posted on: {{ jobOffer.posteddate | date }}</p>
+          <p class="job-offer-expires">Expires on: {{ jobOffer.expirydate | date }}</p>
           <button class="apply-button" (click)="applyJobOffer(jobOffer.id)">Apply</button>
         </div>
       </li>

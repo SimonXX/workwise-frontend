@@ -6,8 +6,8 @@ export interface JobOffer {
   title: string;
   description: string;
   location: string;
-  postedDate: Date;
-  expiryDate: Date;
+  posteddate: Date;
+  expirydate: Date;
   company: Company;
   applications: Application[];
 }

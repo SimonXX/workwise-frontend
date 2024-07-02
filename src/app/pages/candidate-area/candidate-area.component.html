@@ -3,14 +3,36 @@
   <nav class="navbar">
     <div class="navbar-brand">Candidate Dashboard</div>
     <ul class="navbar-nav">
-      <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">Profile</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">Jobs</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">Settings</a></li>
-      <li class="nav-item"><a class="nav-link" (click)="logout()">Logout</a></li>
+      <li class="nav-item"><a href="#" class="nav-link-logout" (click)="logout()">Logout</a></li>
     </ul>
   </nav>
 
-  <app-job-offers></app-job-offers>
 
+  <!-- Pulsanti per selezionare il contenuto -->
+  <div class="toggle-buttons">
+    <div class="centered-buttons">
+      <button class="toggle-button" [ngClass]="{ 'active': activePanel === 'jobOffers' }" (click)="togglePanel('jobOffers')">View Job Offers</button>
+      <button class="toggle-button" [ngClass]="{ 'active': activePanel === 'myApplications' }" (click)="togglePanel('myApplications')">View My Applications</button>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="left-panel">
+      <div class="job-offers">
+        <app-job-offers *ngIf="activePanel === 'jobOffers'"></app-job-offers>
+        <app-my-applications *ngIf="activePanel === 'myApplications'"></app-my-applications>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div class="notifications-sidebar" *ngIf="showNotifications">
+        <app-notifications></app-notifications>
+      </div>
+    </div>
+
+    <!-- Icona a forma di campanella -->
+    <button mat-icon-button (click)="toggleNotifications()">
+      <mat-icon>notifications</mat-icon>
+    </button>
+  </div>
 </div>

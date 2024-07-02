@@ -1,0 +1,36 @@
+<div class="notifications-container">
+  <div class="notification-upbar">
+    <h2 class="notifications-title">Notifications</h2>
+    <i class="fas fa-trash-alt delete-icon" *ngIf="notifications.length > 0" (click)="clearNotifications()"></i>
+  </div>
+
+  <ng-container *ngIf="notifications.length > 0; else noNotifications">
+    <div class="notification-list">
+      <div *ngFor="let notification of notifications" class="notification-item">
+        <div class="notification" [ngClass]="{'read': notification.isRead, 'unread': !notification.isRead}">
+          <span class="notification-created-at">{{ notification.createdAt | date: 'mediumTime' }}</span>
+          <div class="notification-header">
+            <span class="notification-type">{{ notification.type }}</span>
+            <span class="notification-created-at">{{ notification.createdAt | date }}</span>
+          </div>
+          <div class="notification-message">{{ notification.message }}</div>
+          <div class="notification-actions">
+            <button class="mark-as-read-button" *ngIf="!notification.isRead" (click)="markAsRead(notification.id)">Mark as Read</button>
+            <button class="mark-as-unread-button" *ngIf="notification.isRead" (click)="markAsUnread(notification.id)">Mark as Unread</button>
+            <button class="delete-notification-button" (click)="deleteNotification(notification.id)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pagination">
+      <button (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+      <span>Page {{currentPage + 1}} of {{totalPages}}</span>
+      <button (click)="nextPage()" [disabled]="currentPage >= totalPages - 1">Next</button>
+    </div>
+  </ng-container>
+
+  <ng-template #noNotifications>
+    <p>No Incoming Notification, have a good day!</p>
+  </ng-template>
+</div>

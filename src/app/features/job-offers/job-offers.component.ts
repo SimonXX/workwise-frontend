@@ -7,6 +7,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import {Application} from "../../core/models/application.model";
 import {AlertDialogComponent} from "../../shared/components/alert-dialog/alert-dialog.component";
+import {ConfirmationDialogComponent} from "../../shared/components/confirm-dialog/confirm-dialog.component";
+import {MatIcon} from "@angular/material/icon";
 
 type JobOfferField = 'id' | 'title' | 'location' | 'company';
 
@@ -19,7 +21,9 @@ type JobOfferField = 'id' | 'title' | 'location' | 'company';
   imports: [
     DatePipe,
     CommonModule,
-    FormsModule]
+    FormsModule,
+    MatIcon
+  ]
 })
 
 export class JobOffersComponent implements OnInit {
@@ -61,27 +65,43 @@ export class JobOffersComponent implements OnInit {
   }
 
   applyJobOffer(jobOfferId: number):void{
-    const observer = {
-      next: (response: Application) => {
-        console.log('Application submitted successfully:', response);
-        this.openSuccessDialog();
-      },
-      error: (error: any) =>{
-        console.error('Error applying to job offer:', error);
-        if(error.message.toLowerCase().includes('application already exists')){
-          console.error('Error applying to job offer:', error);
-        }
-      },
-      complete: () =>{
-        console.log('Application process completed');
+
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '400px',
+      data: {
+        title: 'Confirm Apply',
+        message: 'Do you want to apply to this job offer?',
+        confirmText: 'Confirm',
+        cancelText: 'Cancel'
       }
-    };
-    this.jobOffersService.applyJobOffer(jobOfferId).subscribe(observer);
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const observer = {
+          next: (response: Application) => {
+            console.log('Application submitted successfully:', response);
+            this.openSuccessDialog();
+            this.loadJobOffers();
+          },
+          error: (error: any) =>{
+            console.error('Error applying to job offer:', error);
+            if(error.message.toLowerCase().includes('application already exists')){
+              console.error('Error applying to job offer:', error);
+            }
+          },
+          complete: () =>{
+            console.log('Application process completed');
+          }
+        };
+        this.jobOffersService.applyJobOffer(jobOfferId).subscribe(observer);
+      }
+    });
   }
 
   openSuccessDialog(): void {
     this.dialog.open(AlertDialogComponent, {
-      data: { message: 'Application submitted successfully' }
+      data: { title: 'Success', message: 'Application submitted successfully' }
     });
   }
 

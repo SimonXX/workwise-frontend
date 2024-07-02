@@ -1,0 +1,140 @@
+.notifications-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.notification-upbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.notifications-title {
+  font-size: 24px;
+  margin: 0;
+}
+
+.delete-icon {
+  color: #f00; /* Colore rosso per l'icona di eliminazione */
+  cursor: pointer;
+}
+
+.notification-list {
+  flex: 1; /* Flessibile per occupare lo spazio rimanente */
+  overflow-y: auto; /* Scorrimento verticale se necessario */
+  margin-bottom: 20px;
+}
+
+.notification-item {
+  margin-bottom: 15px;
+}
+
+.notification {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.notification-type {
+  font-weight: bold;
+}
+
+.notification-created-at {
+  font-size: 0.9em;
+  color: #888;
+}
+
+.notification-message {
+  margin-bottom: 10px;
+}
+
+.notification-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+}
+
+.mark-as-read-button,
+.mark-as-unread-button,
+.delete-notification-button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.mark-as-read-button {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.mark-as-read-button:hover {
+  background-color: #0056b3;
+}
+
+.mark-as-unread-button {
+  background-color: #6f42c1; /* Colore viola */
+  color: #fff;
+}
+
+.mark-as-unread-button:hover {
+  background-color: #5a3598; /* Colore viola scuro per hover */
+}
+
+.delete-notification-button {
+  background-color: #f00; /* Colore rosso */
+  color: #fff;
+}
+
+.delete-notification-button:hover {
+  background-color: #d00; /* Colore rosso scuro per hover */
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.pagination button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-weight: bold;
+}
+
+/* Stili per le notifiche lette e non lette */
+.notification.read {
+  opacity: 0.6; /* Trasparenza per le notifiche lette */
+}
+
+.notification.unread {
+  background-color: #f0f8ff; /* Cambia il background delle notifiche non lette */
+  font-weight: bold; /* Rendi più evidente il testo delle notifiche non lette */
+}
