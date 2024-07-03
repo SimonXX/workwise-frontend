@@ -1,1 +1,59 @@
-<p>candidate-profile works!</p>
+<div class="profile-wrapper">
+  <div class="profile-card">
+    <div class="profile-welcome">
+      <p>Welcome to the main section of your profile</p>
+      <p><i>Here you can edit your information and update your CV</i></p>
+    </div>
+
+    <div class="profile-header">
+      <h1>{{ user.firstName }} {{ user.lastName }}</h1>
+      <p>Role: {{ user.role.name }}</p>
+    </div>
+
+    <div class="profile-details">
+      <div class="detail-item" *ngIf="!editingMode">
+        <div class="detail-label"><i class="fas fa-phone"></i> Phone:</div>
+        <div class="detail-value">{{ user.phone || 'Not provided' }}</div>
+      </div>
+      <div class="detail-item" *ngIf="editingMode">
+        <div class="detail-label"><i class="fas fa-phone"></i> Phone:</div>
+        <input [(ngModel)]="editedUser.phone" placeholder="Phone Number"
+               pattern="[0-9]*"
+        title="Phone number should only contain digits"
+        (keydown)="onKeyDown($event)">
+      </div>
+
+
+      <div class="detail-item">
+        <div class="detail-label"><i class="fas fa-map-marker-alt"></i> Address:</div>
+        <div class="detail-value">{{ user.address || 'Not provided' }}</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label"><i class="fas fa-calendar-alt"></i> Date of Birth:</div>
+        <div class="detail-value">{{ user.dateOfBirth | date:'mediumDate' }}</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label"><i class="fas fa-calendar-plus"></i> Profile Created Date:</div>
+        <div class="detail-value">{{ user.createdDate | date:'mediumDate' }}</div>
+      </div>
+      <div class="detail-item" *ngIf="user.cv !== null">
+        <div class="detail-label"><i class="fas fa-file-download"></i> CV:</div>
+        <div class="detail-value">
+          <a href="#" (click)="downloadCV()">Download CV</a>
+        </div>
+      </div>
+      <div class="detail-item" *ngIf="user.cv === null">
+        <div class="detail-label"><i class="fas fa-file"></i> CV:</div>
+        <div class="detail-value">No CV uploaded</div>
+      </div>
+    </div>
+
+
+    <div class="profile-buttons">
+      <button class="btn btn-primary" (click)="goToCandidateArea()">Back to Candidate Area</button>
+      <button *ngIf="!editingMode" class="btn btn-primary" (click)="editProfile()">Edit Profile</button>
+      <button *ngIf="editingMode" class="btn btn-success" (click)="saveChanges()">Save Changes</button>
+      <button *ngIf="editingMode" class="btn btn-danger" (click)="cancelEditing()">Cancel</button>
+    </div>
+  </div>
+</div>

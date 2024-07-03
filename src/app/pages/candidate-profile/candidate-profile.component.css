@@ -1,0 +1,104 @@
+.profile-wrapper {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0; /* Colore di sfondo grigio chiaro */
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 800px;
+  padding: 40px;
+  background-color: #ffffff; /* Sfondo bianco */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombra sottile */
+  border-radius: 8px; /* Bordi arrotondati */
+}
+
+.profile-welcome {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-welcome p {
+  font-size: 24px; /* Dimensione del carattere aumentata */
+}
+
+.profile-welcome i {
+  font-style: italic;
+  font-size: 14px;
+  color: #666666;
+  display: block;
+  margin-top: 10px;
+}
+
+.profile-header h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.profile-header p {
+  color: #777777;
+  font-size: 16px;
+}
+
+.profile-details .detail-item {
+  background-color: #f9f9f9; /* Sfondo grigio chiaro delle card */
+  padding: 15px; /* Padding interno */
+  border-radius: 8px; /* Bordi arrotondati */
+  margin-bottom: 15px; /* Spazio tra le card */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Ombra sottile */
+}
+
+.profile-details .detail-label {
+  font-weight: bold;
+}
+
+.profile-details .detail-value {
+  margin-top: 5px; /* Spazio superiore del valore */
+}
+
+.profile-buttons {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.profile-buttons button {
+  margin: 0 10px;
+  padding: 12px 24px; /* Padding pulsante */
+  font-size: 16px; /* Dimensione del carattere */
+  cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+  border: 2px solid #8a2be2; /* Bordo viola */
+  border-radius: 4px; /* Bordi arrotondati */
+  background-color: #ffffff; /* Colore di sfondo bianco */
+  color: #8a2be2; /* Colore testo viola */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transizioni */
+}
+
+.profile-buttons button:hover {
+  background-color: #8a2be2; /* Colore di sfondo viola al passaggio del mouse */
+  color: #ffffff; /* Colore testo bianco al passaggio del mouse */
+}
+
+.btn-info {
+  background-color: #17a2b8; /* Colore di sfondo blu */
+  color: #ffffff; /* Colore testo bianco */
+}
+
+.btn-primary {
+  background-color: #007bff; /* Colore di sfondo blu scuro */
+  color: #ffffff; /* Colore testo bianco */
+}
+
+.btn:hover {
+  opacity: 0.8; /* Opacità al passaggio del mouse */
+}
+input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
