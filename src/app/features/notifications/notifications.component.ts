@@ -5,6 +5,7 @@ import {NotificationsService} from "./services/notifications.service";
 import {ConfirmationDialogService} from "../../shared/components/confirm-dialog/service/confirmation-dialog.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmationDialogComponent} from "../../shared/components/confirm-dialog/confirm-dialog.component";
+import {AlertDialogComponent} from "../../shared/components/alert-dialog/alert-dialog.component";
 
 @Component({
   selector: 'app-notifications',
@@ -98,6 +99,7 @@ export class NotificationsComponent implements OnInit {
         this.notificationsService.deleteAllNotifications().subscribe({
           next: response => {
             console.log('All Notifications deleted: ', response);
+            this.openSuccessDialog()
             this.loadNotifications();
           },
           error: error => {
@@ -120,5 +122,11 @@ export class NotificationsComponent implements OnInit {
       this.currentPage--;
       this.loadNotifications();
     }
+  }
+
+  openSuccessDialog(): void {
+    this.dialog.open(AlertDialogComponent, {
+      data: { title: 'Success', message: 'Notifications deleted successfully' }
+    });
   }
 }

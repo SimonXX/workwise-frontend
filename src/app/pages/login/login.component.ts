@@ -59,6 +59,10 @@ export class LoginComponent {
       });
     }
   }
+
+  goHome() {
+    this.router.navigateByUrl('');
+  }
 }
 
 

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CommonModule, DatePipe} from "@angular/common";
+import {CommonModule, DatePipe, NgOptimizedImage} from "@angular/common";
 import {JobOffersComponent} from "../../features/job-offers/job-offers.component";
 import {AuthService} from "../../core/services/auth.service";
 import {NotificationsComponent} from "../../features/notifications/notifications.component";
@@ -21,7 +21,8 @@ import {MyApplicationsComponent} from "../../features/my-applications/my-applica
     SidenavComponent,
     MatIconButton,
     MatIcon,
-    MyApplicationsComponent
+    MyApplicationsComponent,
+    NgOptimizedImage
   ],
   templateUrl: './candidate-area.component.html',
   styleUrl: './candidate-area.component.css'
@@ -29,6 +30,7 @@ import {MyApplicationsComponent} from "../../features/my-applications/my-applica
 export class CandidateAreaComponent implements OnInit{
   activePanel: 'jobOffers' | 'myApplications' = 'jobOffers'; // Default to show job offers
 
+  name = localStorage.getItem('email');
   constructor(private authService: AuthService) {
   }
 

@@ -75,6 +75,7 @@
   border-radius: 4px;
   padding: 15px;
   transition: box-shadow 0.3s;
+  position: relative; /* Necessario per posizionare il pulsante assolutamente */
 }
 
 .application-item:hover {
@@ -104,6 +105,24 @@
 .application-location {
   margin: 5px 0;
   color: #666;
+}
+
+/* Pulsante di eliminazione */
+.delete-app-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: lightcoral; /* Colore rosso */
+  color: #fff;
+  border: none; /* Rimuove il bordo */
+  border-radius: 4px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.delete-app-button:hover {
+  background-color: #d00; /* Colore rosso scuro per hover */
 }
 
 /* Paginazione */
@@ -137,27 +156,4 @@
 .pagination span {
   font-size: 1em;
   color: #333;
-}
-
-/* Bottoni di azione (esempio: Apply button) */
-.apply-button {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s, transform 0.3s;
-}
-
-.apply-button:hover {
-  background-color: #45a049;
-  transform: scale(1.1);
 }

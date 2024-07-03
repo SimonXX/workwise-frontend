@@ -19,4 +19,9 @@ export class MyApplicationsService {
 
     return this.http.get<PaginatedResponse<Application>>(endpoints.myApplications, { params });
 }
+
+  deleteApplication(applicationId: number): Observable<any>{
+    const url = `${endpoints.deleteApplication}/${applicationId}`;
+    return this.http.delete(url);
+  }
 }

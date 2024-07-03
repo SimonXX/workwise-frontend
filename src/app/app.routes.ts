@@ -9,6 +9,7 @@ import {JobOffersComponent} from "./features/job-offers/job-offers.component";
 import {NgModule} from "@angular/core";
 import {companyGuard} from "./core/guards/company.guard";
 import {candidateGuard} from "./core/guards/candidate.guard";
+import {CandidateProfileComponent} from "./pages/candidate-profile/candidate-profile.component";
 
 export const routes: Routes = [
   {
@@ -41,6 +42,11 @@ export const routes: Routes = [
   {
     path: 'jobOffers',
     component: JobOffersComponent
+  },
+  {
+    path: 'profile',
+    component: CandidateProfileComponent,
+    canActivate: [candidateGuard]
   }
 ];
 
