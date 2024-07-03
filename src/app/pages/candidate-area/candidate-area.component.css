@@ -4,6 +4,32 @@
 .candidate-dashboard {
   font-family: Arial, sans-serif;
 }
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra gli elementi orizzontalmente */
+}
+
+.user-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra orizzontalmente l'immagine e il nome */
+  gap: 5px; /* Spazio tra l'immagine e il nome */
+}
+
+.user-icon img {
+  height: auto;
+  cursor: pointer;
+}
+
+.user-icon a {
+  text-decoration: none; /* Rimuove la sottolineatura del link */
+}
+
+.user-name {
+  font-weight: bold; /* Testo in grassetto per evidenziare il nome */
+  color: #333; /* Colore del testo */
+}
 
 /* Barra di navigazione */
 /* Stile generale per la navbar */
@@ -76,7 +102,11 @@
   display: flex;
   flex-direction: row;
 }
+.top-panel {
+  flex: 0.4;
+  padding: 30px;
 
+}
 .left-panel {
   flex: 1; /* Occupa tutto lo spazio rimanente */
   padding-right: 20px; /* Spazio tra i pannelli */
@@ -117,3 +147,5 @@
 .centered-buttons button {
   margin: 0 10px; /* Spazio tra i pulsanti */
 }
+
+

@@ -25,7 +25,9 @@ export const endpoints = {
 
   deleteAllNotifications: host + '/notifications/deleteAllNotifications',
 
-  myApplications: host + '/applications/myApplications'
+  myApplications: host + '/applications/myApplications',
+
+  deleteApplication: host + '/applications/deleteApplication'
 
 
 };

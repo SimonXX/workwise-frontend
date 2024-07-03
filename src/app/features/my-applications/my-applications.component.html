@@ -16,7 +16,7 @@
 
     <select [(ngModel)]="filterCriteria" class="filter-dropdown" (change)="applySearch()">
       <option value="id">ID</option>
-      <option value="title">Job Offer Title</option>
+      <option value="jobOfferTitle">Job Offer Title</option>
       <option value="location">Location</option>
       <option value="company">Company</option>
     </select>
@@ -40,6 +40,7 @@
           <p class="job-offer-description">{{ application.jobOffer.description }}</p>
           <p class="job-offer-location">Location: {{ application.jobOffer.location }}</p>
           <p class="job-offer-company">Company: {{ application.jobOffer.company.name }}</p>
+          <button class="delete-app-button" (click)="deleteApplication(application.id)">Delete</button>
         </div>
       </li>
     </ul>

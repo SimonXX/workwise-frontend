@@ -4,9 +4,12 @@ import {MyApplicationsService} from "./services/my-applications.service";
 import {FormsModule} from "@angular/forms";
 import {MatIcon} from "@angular/material/icon";
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmationDialogComponent} from "../../shared/components/confirm-dialog/confirm-dialog.component";
+import {AlertDialogComponent} from "../../shared/components/alert-dialog/alert-dialog.component";
 
 
-type ApplicationField = 'id' | 'status' | 'Job Offer Title';
+type ApplicationField = 'id' | 'status' | 'jobOfferTitle' | 'location' | 'company';
 
 
 @Component({
@@ -30,10 +33,10 @@ export class MyApplicationsComponent implements OnInit{
   totalPages = 0;
   searchText = '';
   myFilteredApplications: Application[] = [];
-  filterCriteria: ApplicationField = 'Job Offer Title';
+  filterCriteria: ApplicationField = 'jobOfferTitle';
   statusFilter: string = '';
 
-  constructor(private myApplicationsService: MyApplicationsService ) {
+  constructor(private myApplicationsService: MyApplicationsService, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -90,12 +93,51 @@ export class MyApplicationsComponent implements OnInit{
     switch (field) {
       case 'id':
         return application.id.toString();
-      case 'Job Offer Title':
+      case 'jobOfferTitle':
         return application.jobOffer.title;
       case 'status':
         return application.status;
+      case 'location':
+        return application.jobOffer.location;
+      case 'company':
+        return application.jobOffer.company.name;
       default:
         return '';
     }
+  }
+
+  deleteApplication(applicationId: number):void {
+
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '400px',
+      data: {
+        title: 'Delete Confirmation',
+        message: 'Do you want to delete this Application?',
+        confirmText: 'Confirm',
+        cancelText: 'Cancel'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    if(result){
+      this.myApplicationsService.deleteApplication(applicationId).subscribe({
+          next: response => {
+            console.log('App deleted: ', response);
+            this.openSuccessDialog();
+            this.loadMyApplications();
+          },
+          error: error => {
+            console.error('Error to delete application: ', error);
+          }
+        }
+      )
+    }
+    });
+  }
+
+  openSuccessDialog(): void {
+    this.dialog.open(AlertDialogComponent, {
+      data: { title: 'Success', message: 'Application deleted successfully' }
+    });
   }
 }
