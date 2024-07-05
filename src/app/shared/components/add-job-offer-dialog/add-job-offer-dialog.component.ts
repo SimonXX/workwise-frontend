@@ -33,18 +33,25 @@ import {MatInput} from "@angular/material/input";
 })
 export class AddJobOfferDialogComponent {
   form: FormGroup;
+  dialogTitle: string;
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddJobOfferDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    this.dialogTitle = data?.mode === 'add' ? 'Add New Job Offer' : 'Edit This Job Offer';
     this.form = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
       location: ['', Validators.required],
-      expiryDate: ['', Validators.required]
+      expirydate: ['', Validators.required]
     });
+
+    // If editing, populate the form with existing data
+    if (data?.mode === 'edit' && data?.jobOffer) {
+      this.form.patchValue(data.jobOffer);
+    }
   }
 
   save() {

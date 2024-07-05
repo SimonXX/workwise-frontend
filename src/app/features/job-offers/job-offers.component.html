@@ -41,7 +41,7 @@
               <button class="apply-button" (click)="applyJobOffer(jobOffer.id)">Apply</button>
             </ng-container>
             <ng-container *ngIf="role === 'COMPANY'">
-              <button class="edit-button" (click)="editJobOffer(jobOffer.id)">Edit</button>
+              <button class="edit-button" (click)="openEditJobOffer(jobOffer.id)">Edit</button>
               <button class="delete-button" (click)="deleteJobOffer(jobOffer.id)">Delete</button>
             </ng-container>
           </div>

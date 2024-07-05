@@ -140,8 +140,24 @@ export class MyApplicationsComponent implements OnInit {
     });
   }
 
-  modifyApplication(applicationId: number, newStatus: string): void {
+  openEditApplicationSuccessDialog(): void{
+    this.dialog.open(AlertDialogComponent, {
+      data: { title: 'Success', message: 'Edited Application' }
+    });
+  }
 
+
+  modifyApplication(applicationId: number, newStatus: string): void {
+    this.myApplicationsService.modifyApplication(applicationId, newStatus).subscribe({
+      next: (response: Application) =>{
+        console.log('Application modified with success: ', response);
+        this.openEditApplicationSuccessDialog();
+        this.loadMyApplications();
+      },
+      error: (error: any)=>{
+        console.error('Error editing application: ', error);
+      }
+    })
   }
 
   openSuccessDialog(): void {
@@ -164,5 +180,8 @@ export class MyApplicationsComponent implements OnInit {
     });
   }
 
+  getCVByUserEmail(userEmail: string){
+
+  }
 
 }

@@ -34,6 +34,8 @@
           <p class="job-offer-location">Location: {{ application.jobOffer.location }}</p>
           <p class="job-offer-company">Company: {{ application.jobOffer.company.name }}</p>
 
+          
+
           <ng-container *ngIf="role === 'CANDIDATE'">
             <button class="delete-app-button" (click)="deleteApplication(application.id)">Delete</button>
           </ng-container>
@@ -42,7 +44,7 @@
             <!-- Pulsante "Edit" per il cambio di stato -->
             <div class="status-edit-container">
               <button class="edit-status-button" (click)="openStatusDialog(application)">
-                Edit
+                Action
               </button>
             </div>
           </ng-container>
