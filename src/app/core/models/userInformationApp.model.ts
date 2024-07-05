@@ -1,4 +1,5 @@
 export interface UserInformationAppModel {
+  email: string;
   firstName: string;
   lastName: string;
   phone: string;
@@ -7,6 +8,7 @@ export interface UserInformationAppModel {
 }
 
 export class UserInformationAppModelImpl implements UserInformationAppModel {
+  email: string = '';
   firstName: string = '';
   lastName: string = '';
   phone: string = '';
@@ -14,6 +16,7 @@ export class UserInformationAppModelImpl implements UserInformationAppModel {
   cvBase64: string = '';
 
   constructor() {
+    this.email = '';
     this.firstName = '';
     this.lastName = '';
     this.phone = '';

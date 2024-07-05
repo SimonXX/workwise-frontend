@@ -1,4 +1,4 @@
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 ;import {Component, Input, OnInit} from '@angular/core';
 import {DatePipe, NgIf} from "@angular/common";
@@ -37,17 +37,24 @@ import {User, UserImpl} from "../../core/models/user.model";
   styleUrl: './candidate-profile.component.css'
 })
 export class CandidateProfileComponent implements OnInit{
-
   user: User;
   editedUser: User;
+  viewCompany: boolean = false;
 
-  email: String = localStorage.getItem('email') || '';
+
+  //email: String = localStorage.getItem('email') || '';
+  email: string = '';
   editingMode = false; // Variabile per gestire lo stato di editing
   selectedFile: File | null = null;
 
-  constructor(private router: Router, private authService: AuthService, private candidateProfileService: CandidateProfileService) {
+  constructor(private router: Router, private authService: AuthService, private candidateProfileService: CandidateProfileService, private route: ActivatedRoute) {
     this.user = new UserImpl();
     this.editedUser = new UserImpl();
+
+    this.route.queryParams.subscribe(params => {
+      this.email= params['email'] || null;
+      this.viewCompany = params['viewCompany'];
+    });
   }
 
   ngOnInit(): void {

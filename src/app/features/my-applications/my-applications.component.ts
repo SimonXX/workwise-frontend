@@ -10,6 +10,7 @@ import {AlertDialogComponent} from "../../shared/components/alert-dialog/alert-d
 import {AuthService} from "../../core/services/auth.service";
 import {ModifyStatusDialogComponent} from "../../shared/components/modify-status/modify-status.component";
 import {UserInformationAppModel} from "../../core/models/userInformationApp.model";
+import {Router, RouterLink} from "@angular/router";
 
 
 type ApplicationField = 'id' | 'status' | 'jobOfferTitle' | 'location' | 'company';
@@ -23,7 +24,8 @@ type ApplicationField = 'id' | 'status' | 'jobOfferTitle' | 'location' | 'compan
     MatIcon,
     NgIf,
     NgForOf,
-    DatePipe
+    DatePipe,
+    RouterLink
   ],
   templateUrl: './my-applications.component.html',
   styleUrl: './my-applications.component.css'
@@ -42,7 +44,8 @@ export class MyApplicationsComponent implements OnInit {
   constructor(
     private myApplicationsService: MyApplicationsService,
     private dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -196,4 +199,10 @@ export class MyApplicationsComponent implements OnInit {
     });
   }
 
+  navigateToProfile(email: string): void {
+    console.log(email);
+    let viewCompany = true;
+
+    this.router.navigate(['/profile'], { queryParams: { email, viewCompany} });
+  }
 }
