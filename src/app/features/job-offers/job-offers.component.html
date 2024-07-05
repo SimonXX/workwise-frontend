@@ -1,5 +1,6 @@
 <div class="job-offers-container">
-  <h1 class="page-title">Explore All Available Job Offers</h1>
+  <h1 *ngIf="role === 'CANDIDATE'" class="page-title">Explore All Available Job Offers</h1>
+  <h1 *ngIf="role === 'COMPANY'" class="page-title">Your Job Offers</h1>
 
   <div class="search-container">
     <!-- Barra di ricerca e dropdown -->

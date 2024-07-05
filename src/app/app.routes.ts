@@ -47,7 +47,7 @@ export const routes: Routes = [
   {
     path: 'profile',
     component: CandidateProfileComponent,
-    canActivate: [candidateGuard]
+   // canActivate: [candidateGuard, companyGuard]
   },
   {
     path: 'profileCompany',

@@ -8,6 +8,7 @@ import {SidenavComponent} from "../../shared/components/sidenav/sidenav.componen
 import {MatIconButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {MyApplicationsComponent} from "../../features/my-applications/my-applications.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-candidate-area',
@@ -30,8 +31,10 @@ import {MyApplicationsComponent} from "../../features/my-applications/my-applica
 export class CandidateAreaComponent implements OnInit{
   activePanel: 'jobOffers' | 'myApplications' = 'jobOffers'; // Default to show job offers
 
-  name = localStorage.getItem('email');
-  constructor(private authService: AuthService) {
+  name: string;
+  constructor(private authService: AuthService, private router: Router) {
+    const storedEmail = localStorage.getItem('email');
+    this.name = storedEmail !== null ? storedEmail : '';
   }
 
   showNotifications = true;
@@ -48,6 +51,10 @@ export class CandidateAreaComponent implements OnInit{
   }
   togglePanel(panel: 'jobOffers' | 'myApplications'): void {
     this.activePanel = panel;
+  }
+
+  redirectToProfile(){
+    this.router.navigate(['/profile'], { queryParams: { email: this.name } });
   }
 }
 

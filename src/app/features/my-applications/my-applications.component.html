@@ -1,5 +1,6 @@
 <div class="applications-container">
-  <h1 class="page-title">My Applications</h1>
+  <h1 *ngIf="role === 'CANDIDATE'" class="page-title">My Applications</h1>
+  <h1 *ngIf="role === 'COMPANY'" class="page-title">Applications to your job offers</h1>
 
   <div class="search-container">
     <!-- Barra di ricerca e dropdown -->
@@ -42,7 +43,9 @@
             <div class="user-info-card">
               <mat-icon class="profile-icon">person</mat-icon>
               <h3>User Information</h3>
-              <p><strong>First Name:</strong> {{ application.userInformation?.firstName }}</p>
+              <a (click)="navigateToProfile(application.userInformation.email)" class="candidate-name">
+               <u> {{ application.userInformation?.firstName }} {{ application.userInformation?.lastName }}</u>
+              </a>
               <p><strong>Last Name:</strong> {{ application.userInformation?.lastName }}</p>
               <p><strong>Phone:</strong> {{ application.userInformation?.phone }}</p>
               <p><strong>Address:</strong> {{ application.userInformation?.address }}</p>

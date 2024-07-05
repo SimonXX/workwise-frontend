@@ -8,8 +8,8 @@
 <div class="profile-wrapper">
   <div class="profile-card">
     <div class="profile-welcome">
-      <p>Welcome to the main section of your profile</p>
-      <p><i>Here you can edit your information and update your CV</i></p>
+      <p *ngIf="!viewCompany">Welcome to the main section of your profile</p>
+      <p *ngIf="!viewCompany" ><i>Here you can edit your information and update your CV</i></p>
     </div>
 
     <div class="profile-header">
@@ -26,7 +26,7 @@
         <input [(ngModel)]="editedUser.lastName" placeholder="Last Name">
       </div>
       <p>Role: {{ user.role.name }}</p>
-      <div class="mail-item">
+      <div class="mail-item" *ngIf="!viewCompany">
         <div class="mail-label"><i class="fas fa-envelope"></i> Email:</div>
         <div class="mail-value">{{ localStorage.getItem('email') }}</div>
       </div>
@@ -66,13 +66,13 @@
         <div class="detail-label"><i class="fas fa-calendar-plus"></i> Profile Created Date:</div>
         <div class="detail-value">{{ user.createdDate | date:'yyyy-MM-dd' }}</div>
       </div>
-      <div class="detail-item" *ngIf="user.cvBase64 !== '' && !editingMode">
+      <div class="detail-item" *ngIf="user.cvBase64 !== '' && !editingMode && !viewCompany">
         <div class="detail-label"><i class="fas fa-file-download"></i> CV:</div>
         <div class="detail-value">
           <a class="cv-download-link" (click)="downloadCV()">Download CV</a>
         </div>
       </div>
-      <div class="detail-item" *ngIf="user.cvBase64 === '' && !editingMode">
+      <div class="detail-item" *ngIf="user.cvBase64 === '' && !editingMode && !viewCompany">
         <div class="detail-label"><i class="fas fa-file"></i> CV:</div>
         <div class="detail-value">No CV uploaded</div>
       </div>
@@ -85,11 +85,11 @@
     </div>
 
 
-    <div class="profile-buttons">
+    <div class="profile-buttons" *ngIf="!viewCompany">
       <button class="btn btn-primary" (click)="goToCandidateArea()">Back to Candidate Area</button>
-      <button *ngIf="!editingMode" class="btn btn-primary" (click)="editProfile()">Edit Profile</button>
-      <button *ngIf="editingMode" class="btn btn-success" (click)="saveChanges()">Save Changes</button>
-      <button *ngIf="editingMode" class="btn btn-danger" (click)="cancelEditing()">Cancel</button>
+      <button *ngIf="!editingMode && !viewCompany"  class="btn btn-primary" (click)="editProfile()">Edit Profile</button>
+      <button *ngIf="editingMode && !viewCompany" class="btn btn-success" (click)="saveChanges()">Save Changes</button>
+      <button *ngIf="editingMode && !viewCompany" class="btn btn-danger" (click)="cancelEditing()">Cancel</button>
     </div>
   </div>
 </div>
