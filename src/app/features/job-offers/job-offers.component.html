@@ -32,8 +32,9 @@
           <h2 class="job-offer-title">{{ jobOffer.title }}</h2>
           <p class="job-offer-description">{{ jobOffer.description }}</p>
           <p class="job-offer-location">Location: {{ jobOffer.location }}</p>
-          <p class="job-offer-company">Company: {{ jobOffer.company.name }}</p>
-          <p class="job-offer-posted">Posted on: {{ jobOffer.posteddate | date }}</p>
+          <p class="job-offer-company">
+            <strong>Company:</strong> {{ jobOffer.company.name }}
+          </p>          <p class="job-offer-posted">Posted on: {{ jobOffer.posteddate | date }}</p>
           <p class="job-offer-expires">Expires on: {{ jobOffer.expirydate | date }}</p>
 
           <!-- Azioni in base al ruolo -->
