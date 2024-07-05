@@ -17,6 +17,11 @@ import {MatButton, MatButtonModule} from "@angular/material/button";
 import {AppRoutingModule, routes} from "./app.routes";
 import {AuthInterceptor} from "./core/interceptors/auth.interceptors";
 import {ErrorInterceptor} from "./core/interceptors/error.interceptors";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from "@angular/material-moment-adapter";
+import {MatInput, MatInputModule} from "@angular/material/input";
+import {MatFormField} from "@angular/material/form-field";
 
 @NgModule({
   declarations: [
@@ -37,7 +42,11 @@ import {ErrorInterceptor} from "./core/interceptors/error.interceptors";
     LoginComponent,
     MatDialogContent,
     MatButton,
-    MatDialogActions
+    MatDialogActions,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatFormField
   ],
 
   providers: [provideRouter(routes),
@@ -48,7 +57,9 @@ import {ErrorInterceptor} from "./core/interceptors/error.interceptors";
     },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     provideHttpClient(withInterceptorsFromDi()),
-    provideAnimationsAsync(),
+    provideAnimationsAsync(),    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS }
+
   ],
   bootstrap: [AppComponent]
 })

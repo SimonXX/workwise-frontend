@@ -10,6 +10,7 @@ import {NgModule} from "@angular/core";
 import {companyGuard} from "./core/guards/company.guard";
 import {candidateGuard} from "./core/guards/candidate.guard";
 import {CandidateProfileComponent} from "./pages/candidate-profile/candidate-profile.component";
+import {CompanyProfileComponent} from "./pages/company-profile/company-profile.component";
 
 export const routes: Routes = [
   {
@@ -47,6 +48,11 @@ export const routes: Routes = [
     path: 'profile',
     component: CandidateProfileComponent,
     canActivate: [candidateGuard]
+  },
+  {
+    path: 'profileCompany',
+    component: CompanyProfileComponent,
+    canActivate: [companyGuard]
   }
 ];
 

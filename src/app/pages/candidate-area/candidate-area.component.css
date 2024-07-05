@@ -85,7 +85,8 @@
 /* Effetto di hover sul link di Logout */
 .nav-link-logout:hover {
   color: #c82333; /* Cambio colore più scuro al passaggio del mouse */
-  text-decoration: none; /* Rimuove la sottolineatura al passaggio del mouse */
+  text-decoration: underline; /* Sottolineatura al passaggio del mouse */
+
 }
 /* Contenuto principale */
 .main-content {

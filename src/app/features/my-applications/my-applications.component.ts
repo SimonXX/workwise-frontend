@@ -7,6 +7,8 @@ import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmationDialogComponent} from "../../shared/components/confirm-dialog/confirm-dialog.component";
 import {AlertDialogComponent} from "../../shared/components/alert-dialog/alert-dialog.component";
+import {AuthService} from "../../core/services/auth.service";
+import {ModifyStatusDialogComponent} from "../../shared/components/modify-status/modify-status.component";
 
 
 type ApplicationField = 'id' | 'status' | 'jobOfferTitle' | 'location' | 'company';
@@ -25,8 +27,7 @@ type ApplicationField = 'id' | 'status' | 'jobOfferTitle' | 'location' | 'compan
   templateUrl: './my-applications.component.html',
   styleUrl: './my-applications.component.css'
 })
-export class MyApplicationsComponent implements OnInit{
-
+export class MyApplicationsComponent implements OnInit {
   myApplications: Application[] = [];
   currentPage = 0;
   pageSize = 3;
@@ -35,34 +36,40 @@ export class MyApplicationsComponent implements OnInit{
   myFilteredApplications: Application[] = [];
   filterCriteria: ApplicationField = 'jobOfferTitle';
   statusFilter: string = '';
+  role: string | undefined;
 
-  constructor(private myApplicationsService: MyApplicationsService, private dialog: MatDialog) {
-  }
+  constructor(
+    private myApplicationsService: MyApplicationsService,
+    private dialog: MatDialog,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-
+    const token = this.authService.getToken(); // Assuming you have a method to get the token
+    this.role = this.authService.getRoleFromToken(token ?? ''); // Get the role from the token
+    console.log(this.role);
     this.loadMyApplications();
   }
 
-  loadMyApplications(): void{
+  loadMyApplications(): void {
     const observer = {
-      next: (response: any) =>{
+      next: (response: any) => {
         this.myApplications = response.content;
         this.totalPages = response.totalPages;
 
-        if(this.searchText){
+        if (this.searchText) {
           this.applySearch();
-        }else{
-          this.myFilteredApplications= this.myApplications;
+        } else {
+          this.myFilteredApplications = this.myApplications;
         }
-
       },
-      error: (error: any) =>{
-        console.error('Error loading job offers: ', error);
+      error: (error: any) => {
+        console.error('Error loading applications: ', error);
       }
-    }
+    };
     this.myApplicationsService.getMyApplications(this.currentPage, this.pageSize).subscribe(observer);
   }
+
   nextPage(): void {
     if (this.currentPage < this.totalPages - 1) {
       this.currentPage++;
@@ -106,8 +113,7 @@ export class MyApplicationsComponent implements OnInit{
     }
   }
 
-  deleteApplication(applicationId: number):void {
-
+  deleteApplication(applicationId: number): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '400px',
       data: {
@@ -119,25 +125,44 @@ export class MyApplicationsComponent implements OnInit{
     });
 
     dialogRef.afterClosed().subscribe(result => {
-    if(result){
-      this.myApplicationsService.deleteApplication(applicationId).subscribe({
+      if (result) {
+        this.myApplicationsService.deleteApplication(applicationId).subscribe({
           next: response => {
-            console.log('App deleted: ', response);
+            console.log('Application deleted: ', response);
             this.openSuccessDialog();
             this.loadMyApplications();
           },
           error: error => {
-            console.error('Error to delete application: ', error);
+            console.error('Error deleting application: ', error);
           }
-        }
-      )
-    }
+        });
+      }
     });
+  }
+
+  modifyApplication(applicationId: number, newStatus: string): void {
+
   }
 
   openSuccessDialog(): void {
     this.dialog.open(AlertDialogComponent, {
-      data: { title: 'Success', message: 'Application deleted successfully' }
+      data: { title: 'Success', message: 'Operation completed successfully' }
     });
   }
+
+
+  openStatusDialog(application: { status: any; id: number; }): void {
+    const dialogRef = this.dialog.open(ModifyStatusDialogComponent, {
+      width: '300px',
+      data: { currentStatus: application.status },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.modifyApplication(application.id, result);
+      }
+    });
+  }
+
+
 }

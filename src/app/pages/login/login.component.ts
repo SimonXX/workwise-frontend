@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {AuthService} from "../../core/services/auth.service";
 import {Router} from "@angular/router";
 import {NgIf} from "@angular/common";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,8 @@ import {NgIf} from "@angular/common";
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    MatIcon
   ],
   styleUrls: ['./login.component.scss']
 
@@ -33,6 +35,7 @@ export class LoginComponent {
     const val = this.form.value;
 
     if (val.email && val.password) {
+      console.log(val.email, val.password);
       this.authService.login(val.email, val.password).subscribe({
         next: (response) => {
           if (response.status === 200) {

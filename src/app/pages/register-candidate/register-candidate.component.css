@@ -1,0 +1,119 @@
+/* Imposta lo sfondo della pagina */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5; /* Grigio chiarissimo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Container principale per il form di registrazione */
+.register-form {
+  background-color: white;
+  padding: 40px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 18px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Gruppo di form */
+.form-group {
+  margin-bottom: 20px;
+  width: 100%;
+  text-align: left;
+}
+
+/* Etichette di input */
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #666;
+  font-weight: bold;
+}
+
+/* Container per il date picker */
+.date-picker-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Campi di input */
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #000; /* Contorno nero */
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-control::placeholder {
+  color: rgba(0, 0, 0, 0.5); /* Testo trasparente */
+}
+
+/* Bottone di registrazione */
+.register-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #000000; /* Colore nero */
+  color: #ffffff;
+  font-size: 1em;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+.register-button:hover {
+  background-color: #28a745; /* Verde quando si passa sopra */
+}
+
+/* Bottone di home */
+.home-button-container {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.home-button {
+  padding: 7px 10px;
+  border: none;
+  background-color: lightgrey; /* Colore nero */
+  color: #ffffff; /* Testo bianco */
+  font-size: 0.8em;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.home-button:hover {
+  background-color: #28a745; /* Verde quando si passa sopra */
+}
+
+.home-link {
+  color: black; /* Colore del testo blu simile a un link */
+  text-decoration: underline; /* Sottolinea il testo */
+  cursor: pointer; /* Cambia il cursore quando il mouse è sopra */
+}
+
+.home-link:hover {
+  color: #0056b3; /* Cambia colore del testo al passaggio del mouse */
+}
+
+.home-button-container:hover .home-icon {
+  color: #0056b3; /* Cambia colore dell'icona al passaggio del mouse */
+}
+
+.error-message {
+  color: blueviolet;
+  font-size: 10px;
+  margin-top: 1px;
+}

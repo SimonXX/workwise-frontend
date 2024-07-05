@@ -1,0 +1,48 @@
+/* Stile per il dialogo di aggiunta offerta di lavoro */
+h1.mat-dialog-title {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+textarea.mat-input-element {
+  min-height: 100px; /* Altezza minima per il campo descrizione */
+}
+
+.date-picker-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.mat-datepicker-toggle {
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.mat-dialog-content {
+  max-width: 600px; /* Larghezza massima del contenuto del dialogo */
+}
+
+.mat-dialog-actions {
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+/* Stile per i bottoni nel dialogo */
+button.mat-button {
+  margin-left: 8px;
+}
+
+button.mat-button:last-child {
+  margin-left: 0;
+}
+
+button.mat-button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

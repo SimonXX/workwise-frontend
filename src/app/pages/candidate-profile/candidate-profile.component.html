@@ -1,3 +1,10 @@
+
+<nav class="navbar">
+  <div class="navbar-brand">Candidate Dashboard</div>
+  <ul class="navbar-nav">
+    <li class="nav-item"><a class="nav-link-logout" (click)="logout()">Logout</a></li>
+  </ul>
+</nav>
 <div class="profile-wrapper">
   <div class="profile-card">
     <div class="profile-welcome">
@@ -6,8 +13,23 @@
     </div>
 
     <div class="profile-header">
-      <h1>{{ user.firstName }} {{ user.lastName }}</h1>
+      <img src="assets/images/profilePage.png" alt="User Profile">
+      <div class = "generality" *ngIf="!editingMode">
+      <h1 >{{ user.firstName }} {{ user.lastName }}</h1>
+      </div>
+      <div class="detail-item" *ngIf="editingMode">
+        <div class="detail-label"><i class="fas fa-user"></i> First Name:</div>
+        <input [(ngModel)]="editedUser.firstName" placeholder="First Name">
+      </div>
+      <div class="detail-item" *ngIf="editingMode">
+        <div class="detail-label"><i class="fas fa-user"></i> Last Name:</div>
+        <input [(ngModel)]="editedUser.lastName" placeholder="Last Name">
+      </div>
       <p>Role: {{ user.role.name }}</p>
+      <div class="mail-item">
+        <div class="mail-label"><i class="fas fa-envelope"></i> Email:</div>
+        <div class="mail-value">{{ localStorage.getItem('email') }}</div>
+      </div>
     </div>
 
     <div class="profile-details">
@@ -22,30 +44,44 @@
         title="Phone number should only contain digits"
         (keydown)="onKeyDown($event)">
       </div>
-
-
-      <div class="detail-item">
+      <div class="detail-item" *ngIf="!editingMode">
         <div class="detail-label"><i class="fas fa-map-marker-alt"></i> Address:</div>
         <div class="detail-value">{{ user.address || 'Not provided' }}</div>
       </div>
-      <div class="detail-item">
+      <div class="detail-item" *ngIf="editingMode">
+        <div class="detail-label"><i class="fas fa-map-marker-alt"></i> Address:</div>
+        <input [(ngModel)]="editedUser.address" placeholder="Address">
+      </div>
+      <div class="detail-item" *ngIf="!editingMode">
         <div class="detail-label"><i class="fas fa-calendar-alt"></i> Date of Birth:</div>
-        <div class="detail-value">{{ user.dateOfBirth | date:'mediumDate' }}</div>
+        <div class="detail-value">{{ user.dateOfBirth | date:'yyyy-MM-dd' }}</div>
+      </div>
+      <div class="detail-item" *ngIf="editingMode">
+        <div class="detail-label"><i class="fas fa-calendar-alt"></i> Date of Birth:</div>
+        <input matInput [matDatepicker]="basicDatepicker" [(ngModel)]="editedUser.dateOfBirth" readonly>
+        <mat-datepicker-toggle matSuffix [for]="basicDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #basicDatepicker></mat-datepicker>
       </div>
       <div class="detail-item">
         <div class="detail-label"><i class="fas fa-calendar-plus"></i> Profile Created Date:</div>
-        <div class="detail-value">{{ user.createdDate | date:'mediumDate' }}</div>
+        <div class="detail-value">{{ user.createdDate | date:'yyyy-MM-dd' }}</div>
       </div>
-      <div class="detail-item" *ngIf="user.cv !== null">
+      <div class="detail-item" *ngIf="user.cvBase64 !== '' && !editingMode">
         <div class="detail-label"><i class="fas fa-file-download"></i> CV:</div>
         <div class="detail-value">
-          <a href="#" (click)="downloadCV()">Download CV</a>
+          <a class="cv-download-link" (click)="downloadCV()">Download CV</a>
         </div>
       </div>
-      <div class="detail-item" *ngIf="user.cv === null">
+      <div class="detail-item" *ngIf="user.cvBase64 === '' && !editingMode">
         <div class="detail-label"><i class="fas fa-file"></i> CV:</div>
         <div class="detail-value">No CV uploaded</div>
       </div>
+      <div class="detail-item" *ngIf="editingMode">
+        <div class="detail-label"><i class="fas fa-file"></i> Upload CV:</div>
+        <input class="file-input" type="file" (change)="onFileSelected($event)" accept=".pdf">
+        <button class="btn btn-secondary upload-btn" (click)="uploadCV()">Upload CV</button>
+      </div>
+
     </div>
 
 

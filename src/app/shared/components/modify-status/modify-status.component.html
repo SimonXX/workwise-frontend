@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Edit Application Status</h2>
+<div mat-dialog-content>
+  <p>Current Status: {{ data.currentStatus }}</p>
+  <mat-form-field>
+    <mat-label>Select New Status</mat-label>
+    <mat-select [(ngModel)]="selectedStatus">
+      <mat-option value="pending">Pending</mat-option>
+      <mat-option value="accepted">Accepted</mat-option>
+      <mat-option value="rejected">Rejected</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="selectedStatus" cdkFocusInitial>Save</button>
+</div>

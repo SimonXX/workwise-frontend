@@ -1,0 +1,152 @@
+/* src/app/candidate-area/candidate-area.component.scss */
+
+/* Font generico per il componente */
+.candidate-dashboard {
+  font-family: Arial, sans-serif;
+}
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra gli elementi orizzontalmente */
+}
+
+.user-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra orizzontalmente l'immagine e il nome */
+  gap: 5px; /* Spazio tra l'immagine e il nome */
+}
+
+.user-icon img {
+  height: auto;
+  cursor: pointer;
+}
+
+.user-icon a {
+  text-decoration: none; /* Rimuove la sottolineatura del link */
+}
+
+.user-name {
+  font-weight: bold; /* Testo in grassetto per evidenziare il nome */
+  color: #333; /* Colore del testo */
+}
+
+/* Barra di navigazione */
+/* Stile generale per la navbar */
+.navbar {
+  background-color: #f8f9fa; /* Colore di sfondo più chiaro */
+  padding: 25px 20px; /* Padding interno, più spazio in alto e in basso */
+  display: flex; /* Utilizza flexbox per allineare gli elementi */
+  justify-content: space-between; /* Allinea gli elementi con spazio tra di loro */
+  align-items: center; /* Allinea verticalmente al centro */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra sottile */
+}
+
+/* Stile per il testo del brand */
+.navbar-brand {
+  color: #333; /* Colore testo scuro */
+  font-size: 30px; /* Dimensione del testo aumentata */
+  font-weight: bold; /* Grassetto */
+}
+
+/* Stili per la lista di link nella navbar */
+.navbar-nav {
+  list-style-type: none; /* Rimuove i punti dalla lista */
+  margin: 0; /* Rimuove il margine predefinito */
+  padding: 0; /* Rimuove il padding predefinito */
+  display: flex; /* Utilizza flexbox per allineare gli elementi */
+}
+
+/* Stili per gli elementi della navbar */
+.nav-item {
+  margin-right: 20px; /* Margine a destra aumentato */
+}
+
+/* Stili per i link della navbar */
+.nav-link {
+  color: #555; /* Colore testo più scuro */
+  text-decoration: none; /* Rimuove la sottolineatura dei link */
+  padding: 12px; /* Padding interno aumentato */
+  transition: color 0.3s; /* Transizione del colore al passaggio del mouse */
+}
+
+/* Effetto di hover sui link della navbar */
+.nav-link:hover {
+  color: #007bff; /* Cambio colore al passaggio del mouse verso un blu più vivace */
+  text-decoration: underline; /* Sottolineatura al passaggio del mouse */
+}
+/* Stili per il link di Logout */
+.nav-link-logout {
+  color: #dc3545; /* Colore rosso per il Logout */
+  font-weight: bold; /* Grassetto per enfatizzare */
+  transition: color 0.3s; /* Transizione del colore al passaggio del mouse */
+}
+
+/* Effetto di hover sul link di Logout */
+.nav-link-logout:hover {
+  color: #c82333; /* Cambio colore più scuro al passaggio del mouse */
+  text-decoration: underline; /* Sottolineatura al passaggio del mouse */
+
+}
+/* Contenuto principale */
+.main-content {
+  padding: 20px;
+
+  h2 {
+    margin-bottom: 10px;
+  }
+
+
+}
+
+.main-content {
+  display: flex;
+  flex-direction: row;
+}
+.top-panel {
+  flex: 0.4;
+  padding: 30px;
+
+}
+.left-panel {
+  flex: 1; /* Occupa tutto lo spazio rimanente */
+  padding-right: 20px; /* Spazio tra i pannelli */
+}
+
+.right-panel {
+  width: 300px; /* Larghezza fissa per il pannello delle notifiche */
+  padding-left: 20px; /* Spazio tra i pannelli */
+}
+
+.toggle-button {
+  background-color: transparent;
+  color: #6f42c1; /* Colore viola */
+  border: 1px solid #6f42c1; /* Bordo viola */
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.toggle-button.active {
+  background-color: #6f42c1; /* Colore di sfondo viola */
+  color: #fff; /* Colore testo bianco */
+}
+
+.toggle-button:hover {
+  background-color: #6f42c1; /* Cambio colore al passaggio del mouse */
+  color: #fff; /* Colore testo bianco */
+}
+
+/* Stili per centrare i pulsanti */
+.centered-buttons {
+  text-align: center;
+  margin-top: 20px; /* Aggiungi un margine per distanziare dai contenuti sopra */
+}
+
+.centered-buttons button {
+  margin: 0 10px; /* Spazio tra i pulsanti */
+}
+
+
