@@ -49,5 +49,9 @@ export const endpoints = {
 
   registerCompany: host + '/auth/register/company',
 
+  getInformationUser: host + '/users/information',
+
+  getInformationUserById: host + '/users/information/id'
+
 };
 

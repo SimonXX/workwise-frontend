@@ -118,6 +118,14 @@ export class JobOffersComponent implements OnInit {
     });
   }
 
+  openEditJobSuccessiDialog(): void{
+    this.dialog.open(AlertDialogComponent, {
+      data: {
+        title: 'Success', message: 'Job Offer modified'
+      }
+    })
+  }
+
   openDeletedJobSuccessDialog(): void{
     this.dialog.open(AlertDialogComponent, {
       data: { title: 'Success', message: 'Deleted Job Offer' }
@@ -167,9 +175,7 @@ export class JobOffersComponent implements OnInit {
     }
   }
 
-  editJobOffer(jobOfferId: number): void {
-    // Implementa la logica per editare un'offerta di lavoro
-  }
+
 
   deleteJobOffer(jobOfferId: number): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
@@ -204,6 +210,7 @@ export class JobOffersComponent implements OnInit {
 
   addJobOffers(newJobOffer: JobOffer): void {
 
+      console.log(newJobOffer.expirydate);
         this.jobOffersService.addJobOffer(newJobOffer).subscribe({
           next: (response: JobOffer) => {
             console.log('Job offer added successfully:', response);
@@ -217,15 +224,57 @@ export class JobOffersComponent implements OnInit {
   }
 
   openAddJobOfferDialog(): void {
+
     const dialogRef = this.dialog.open(AddJobOfferDialogComponent, {
       width: '600px', // Imposta la larghezza del dialogo come preferisci
-      data: {} // Eventuali dati da passare al dialogo, se necessario
+      data: {
+        mode: 'add' // Indica che stai modificando un'offerta di lavoro esistente
+      }// Eventuali dati da passare al dialogo, se necessario
     });
 
     dialogRef.afterClosed().subscribe(result => {
       // Gestione della chiusura del dialogo e dei dati restituiti
       if (result) {
         this.addJobOffers(result); // Chiamata alla funzione addJobOffers con i dati restituiti dal dialogo
+      }
+    });
+  }
+
+  editJobOffers(newJobOffer: JobOffer, jobOfferId: number): void {
+
+    newJobOffer.id = jobOfferId;
+
+    console.log(newJobOffer);
+    this.jobOffersService.modifyJobOffer(newJobOffer).subscribe({
+      next: (response: JobOffer) => {
+        console.log('Job offer modified successfully:', response);
+        this.openEditJobSuccessiDialog();
+        this.loadJobOffers();
+      },
+      error: (error: any) => {
+        console.error('Error adding job offer:', error);
+      }
+    });
+  }
+
+
+  openEditJobOffer(jobOfferId: number): void {
+    // Trova l'offerta di lavoro esistente in base all'ID
+    const existingJobOffer = this.jobOffers.find(offer => offer.id === jobOfferId);
+
+    // Apri il dialogo e passa i dati esistenti dell'offerta di lavoro
+    const dialogRef = this.dialog.open(AddJobOfferDialogComponent, {
+      width: '600px', // Imposta la larghezza del dialogo come preferisci
+      data: {
+        mode: 'edit', // Indica che stai modificando un'offerta di lavoro esistente
+        jobOffer: existingJobOffer // Passa i dati dell'offerta di lavoro esistente
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // Gestione della chiusura del dialogo e dei dati restituiti
+      if (result) {
+        this.editJobOffers(result, jobOfferId); // Chiamata alla funzione editJobOffers con i dati restituiti dal dialogo
       }
     });
   }

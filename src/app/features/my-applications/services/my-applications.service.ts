@@ -4,6 +4,8 @@ import {Observable} from "rxjs";
 import {PaginatedResponse} from "../../../core/models/paginated-response.model";
 import {Application} from "../../../core/models/application.model";
 import {endpoints} from "../../../core/constants/endpoints";
+import {H} from "@angular/cdk/keycodes";
+import {UserInformationAppModel} from "../../../core/models/userInformationApp.model";
 
 @Injectable({
   providedIn: 'root'
@@ -25,11 +27,25 @@ export class MyApplicationsService {
     return this.http.delete(url);
   }
 
-  modifyApplication(applicationId: number, newStatus: string): Observable<any>{
-    const params = new HttpParams()
-      .set('idApplication', applicationId.toString())
-      .set('newStatus', newStatus.toString())
 
-    return this.http.put<Application>(endpoints.modifyApplication, {params});
+  modifyApplication(applicationId: number, newStatus: string): Observable<any> {
+    const body = {
+      idApplication: applicationId,
+      newStatus: newStatus
+    };
+
+    return this.http.put<Application>(endpoints.modifyApplication, body);
+  }
+
+  getInformationByUserEmail(userEmail: string): Observable<UserInformationAppModel> {
+    const params = new HttpParams().set('userEmail', userEmail);
+
+    return this.http.get<UserInformationAppModel>(endpoints.getInformationUser, { params });
+  }
+
+  getInformationByUserId(userId: number): Observable<UserInformationAppModel> {
+    // Implementazione del nuovo metodo
+    const params = new HttpParams().set('userId', userId.toString());
+    return this.http.get<UserInformationAppModel>(endpoints.getInformationUserById, { params });
   }
 }

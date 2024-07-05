@@ -39,10 +39,26 @@
           </ng-container>
 
           <ng-container *ngIf="role === 'COMPANY'">
-            <!-- Pulsante "Edit" per il cambio di stato -->
+            <div class="user-info-card">
+              <mat-icon class="profile-icon">person</mat-icon>
+              <h3>User Information</h3>
+              <p><strong>First Name:</strong> {{ application.userInformation?.firstName }}</p>
+              <p><strong>Last Name:</strong> {{ application.userInformation?.lastName }}</p>
+              <p><strong>Phone:</strong> {{ application.userInformation?.phone }}</p>
+              <p><strong>Address:</strong> {{ application.userInformation?.address }}</p>
+              <ng-container *ngIf="application.userInformation?.cvBase64; else noCV">
+                <div class="cv-download">
+                  <mat-icon class="cv-icon">description</mat-icon>
+                  <a [href]="'data:application/pdf;base64,' + application.userInformation.cvBase64" download="CV.pdf">CV</a>
+                </div>
+              </ng-container>
+              <ng-template #noCV>
+                <p class="cv-not-uploaded">CV not uploaded by Candidate</p>
+              </ng-template>
+            </div>
             <div class="status-edit-container">
               <button class="edit-status-button" (click)="openStatusDialog(application)">
-                Edit
+                Action
               </button>
             </div>
           </ng-container>

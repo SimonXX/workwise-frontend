@@ -9,6 +9,7 @@ import {ConfirmationDialogComponent} from "../../shared/components/confirm-dialo
 import {AlertDialogComponent} from "../../shared/components/alert-dialog/alert-dialog.component";
 import {AuthService} from "../../core/services/auth.service";
 import {ModifyStatusDialogComponent} from "../../shared/components/modify-status/modify-status.component";
+import {UserInformationAppModel} from "../../core/models/userInformationApp.model";
 
 
 type ApplicationField = 'id' | 'status' | 'jobOfferTitle' | 'location' | 'company';
@@ -62,6 +63,8 @@ export class MyApplicationsComponent implements OnInit {
         } else {
           this.myFilteredApplications = this.myApplications;
         }
+
+        this.loadUserInformations()
       },
       error: (error: any) => {
         console.error('Error loading applications: ', error);
@@ -140,8 +143,24 @@ export class MyApplicationsComponent implements OnInit {
     });
   }
 
-  modifyApplication(applicationId: number, newStatus: string): void {
+  openEditApplicationSuccessDialog(): void{
+    this.dialog.open(AlertDialogComponent, {
+      data: { title: 'Success', message: 'Edited Application' }
+    });
+  }
 
+
+  modifyApplication(applicationId: number, newStatus: string): void {
+    this.myApplicationsService.modifyApplication(applicationId, newStatus).subscribe({
+      next: (response: Application) =>{
+        console.log('Application modified with success: ', response);
+        this.openEditApplicationSuccessDialog();
+        this.loadMyApplications();
+      },
+      error: (error: any)=>{
+        console.error('Error editing application: ', error);
+      }
+    })
   }
 
   openSuccessDialog(): void {
@@ -164,5 +183,17 @@ export class MyApplicationsComponent implements OnInit {
     });
   }
 
+  loadUserInformations(): void {
+    this.myFilteredApplications.forEach(application => {
+      this.myApplicationsService.getInformationByUserId(application.idUser).subscribe({
+        next: (userInfo: UserInformationAppModel) => {
+          application.userInformation = userInfo;
+        },
+        error: (error: any) => {
+          console.error('Error loading user information: ', error);
+        }
+      });
+    });
+  }
 
 }

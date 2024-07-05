@@ -165,7 +165,7 @@
 }
 
 .edit-status-button {
-  background-color: #007bff; /* Colore blu per Edit */
+  background-color: mediumpurple; /* Colore blu per Edit */
   color: white;
   border: none;
   padding: 10px 15px;
@@ -180,4 +180,80 @@
 
 .edit-status-button:hover {
   background-color: #0056b3; /* Cambio colore al passaggio del mouse */
+}
+
+/* Generale per la scheda */
+.user-info-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #f9f9f9;
+  margin-top: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Titolo della scheda */
+.user-info-card h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.25em;
+}
+
+/* Informazioni utente */
+.user-info-card p {
+  margin: 4px 0;
+  line-height: 1.5;
+}
+
+/* Bottone di download del CV */
+.download-cv-button {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+.download-cv-button:hover {
+  background-color: #0056b3;
+}
+
+
+/* CV download */
+.cv-download {
+  display: flex;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.cv-download mat-icon.cv-icon {
+  font-size: 24px;
+  margin-right: 8px;
+  color: #007bff;
+  vertical-align: middle; /* Allinea verticalmente al centro */
+}
+
+.cv-download a {
+  text-decoration: none;
+  color: lightblue;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  vertical-align: middle; /* Allinea verticalmente al centro */
+}
+
+.cv-download a:hover {
+  text-decoration: underline;
+}
+.cv-not-uploaded {
+  color: lightcoral; /* Colore rosso per attirare l'attenzione */
+  font-style: italic; /* Stile corsivo */
+  margin-top: 10px; /* Spazio superiore */
+  text-decoration: underline; /* Sottolinea il testo */
+
 }
