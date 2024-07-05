@@ -9,6 +9,7 @@ import {ConfirmationDialogComponent} from "../../shared/components/confirm-dialo
 import {AlertDialogComponent} from "../../shared/components/alert-dialog/alert-dialog.component";
 import {AuthService} from "../../core/services/auth.service";
 import {ModifyStatusDialogComponent} from "../../shared/components/modify-status/modify-status.component";
+import {UserInformationAppModel} from "../../core/models/userInformationApp.model";
 
 
 type ApplicationField = 'id' | 'status' | 'jobOfferTitle' | 'location' | 'company';
@@ -62,6 +63,8 @@ export class MyApplicationsComponent implements OnInit {
         } else {
           this.myFilteredApplications = this.myApplications;
         }
+
+        this.loadUserInformations()
       },
       error: (error: any) => {
         console.error('Error loading applications: ', error);
@@ -180,8 +183,17 @@ export class MyApplicationsComponent implements OnInit {
     });
   }
 
-  getCVByUserEmail(userEmail: string){
-
+  loadUserInformations(): void {
+    this.myFilteredApplications.forEach(application => {
+      this.myApplicationsService.getInformationByUserId(application.idUser).subscribe({
+        next: (userInfo: UserInformationAppModel) => {
+          application.userInformation = userInfo;
+        },
+        error: (error: any) => {
+          console.error('Error loading user information: ', error);
+        }
+      });
+    });
   }
 
 }

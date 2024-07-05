@@ -1,4 +1,5 @@
 import {JobOffer, JobOfferImpl} from "./job-offer.model";
+import {UserInformationAppModel, UserInformationAppModelImpl} from "./userInformationApp.model";
 
 export interface Application {
   id: number;
@@ -6,6 +7,7 @@ export interface Application {
   applicationDate: Date;
   status: string;
   jobOffer: JobOffer;
+  userInformation: UserInformationAppModel; // Aggiungi questo campo opzionale
 }
 
 export class ApplicationImpl implements Application {
@@ -14,6 +16,7 @@ export class ApplicationImpl implements Application {
   applicationDate: Date;
   status: string;
   jobOffer: JobOffer;
+  userInformation: UserInformationAppModel; // Aggiungi questo campo opzionale
 
   constructor() {
     this.id = 0; // Inizializza con 0
@@ -21,5 +24,6 @@ export class ApplicationImpl implements Application {
     this.applicationDate = new Date(); // Inizializza con la data corrente
     this.status = ''; // Stringa vuota come valore predefinito
     this.jobOffer = new JobOfferImpl(); // Inizializza con un oggetto JobOffer vuoto
+    this.userInformation = new UserInformationAppModelImpl();
   }
 }

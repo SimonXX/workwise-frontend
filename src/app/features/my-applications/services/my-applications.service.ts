@@ -43,4 +43,9 @@ export class MyApplicationsService {
     return this.http.get<UserInformationAppModel>(endpoints.getInformationUser, { params });
   }
 
+  getInformationByUserId(userId: number): Observable<UserInformationAppModel> {
+    // Implementazione del nuovo metodo
+    const params = new HttpParams().set('userId', userId.toString());
+    return this.http.get<UserInformationAppModel>(endpoints.getInformationUserById, { params });
+  }
 }
