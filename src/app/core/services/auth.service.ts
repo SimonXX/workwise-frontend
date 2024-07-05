@@ -1,5 +1,5 @@
 import {BehaviorSubject, catchError, Observable, of, shareReplay, tap, throwError} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {Injectable} from "@angular/core";
 import {endpoints} from "../constants/endpoints";
@@ -19,7 +19,12 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router, private dialog: MatDialog) { }
 
   login(email: string, password: string) {
-    return this.http.post<any>(endpoints.login, { email, password }, { observe: 'response' }).pipe(
+    console.log('login auth');
+
+    const headers = new HttpHeaders().set('skipInterceptor', '');
+
+
+    return this.http.post<any>(endpoints.login, { email, password }, { headers, observe: 'response' }).pipe(
       shareReplay(),
       tap({
         next: (response) => {

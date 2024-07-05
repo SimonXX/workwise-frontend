@@ -14,6 +14,7 @@ export class JobOffersService {
 
   constructor(private http: HttpClient) { }
 
+  //usato sia da user che da company
   getJobOffers(page: number, size: number): Observable<PaginatedResponse<JobOffer>> {
     const params = new HttpParams()
       .set('page', page.toString())
@@ -28,5 +29,18 @@ export class JobOffersService {
     };
 
     return this.http.post<Application>(endpoints.addApplications, body);
+  }
+
+  deleteJobOffer(jobOfferId: number): Observable<any> {
+    const url =`${endpoints.deleteJobOffer}/${jobOfferId}`;
+    return this.http.delete(url);
+  }
+
+  addJobOffer(jobOffer: JobOffer): Observable<JobOffer>{
+    return this.http.post<JobOffer>(endpoints.addJobOffer, jobOffer);
+  }
+
+  modifyJobOffer(jobOffer: JobOffer): Observable<JobOffer>{
+    return this.http.put<JobOffer>(endpoints.modifyJobOffer, jobOffer);
   }
 }

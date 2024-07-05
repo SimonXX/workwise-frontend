@@ -27,8 +27,27 @@ export const endpoints = {
 
   myApplications: host + '/applications/myApplications',
 
-  deleteApplication: host + '/applications/deleteApplication'
+  deleteApplication: host + '/applications/deleteApplication',
 
+  myInformationUser : host + '/users/email',
+
+  companyInformation: host + '/companies/email',
+
+  deleteJobOffer: host + '/joboffers/deleteJobOffer',
+
+  addJobOffer: host + '/joboffers/addJobOffer',
+
+  modifyJobOffer: host + '/joboffers/modifyJobOffer',
+
+  modifyApplication: host + '/applications/modifyApplication',
+
+  modifyCompanyInformation: host + '/companies/change',
+
+  modifyUserInformation: host + '/users/change',
+
+  registerUser: host + '/auth/register/user',
+
+  registerCompany: host + '/auth/register/company',
 
 };
 

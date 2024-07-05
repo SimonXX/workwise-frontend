@@ -24,4 +24,12 @@ export class MyApplicationsService {
     const url = `${endpoints.deleteApplication}/${applicationId}`;
     return this.http.delete(url);
   }
+
+  modifyApplication(applicationId: number, newStatus: string): Observable<any>{
+    const params = new HttpParams()
+      .set('idApplication', applicationId.toString())
+      .set('newStatus', newStatus.toString())
+
+    return this.http.put<Application>(endpoints.modifyApplication, {params});
+  }
 }

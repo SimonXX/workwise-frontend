@@ -9,6 +9,8 @@ import {Application} from "../../core/models/application.model";
 import {AlertDialogComponent} from "../../shared/components/alert-dialog/alert-dialog.component";
 import {ConfirmationDialogComponent} from "../../shared/components/confirm-dialog/confirm-dialog.component";
 import {MatIcon} from "@angular/material/icon";
+import {AuthService} from "../../core/services/auth.service";
+import {AddJobOfferDialogComponent} from "../../shared/components/add-job-offer-dialog/add-job-offer-dialog.component";
 
 type JobOfferField = 'id' | 'title' | 'location' | 'company';
 
@@ -34,12 +36,17 @@ export class JobOffersComponent implements OnInit {
   totalPages = 0;
   searchText = '';
   filterCriteria: JobOfferField = 'title';
+  role: string | undefined;
 
-  constructor(private jobOffersService: JobOffersService, private dialog: MatDialog, private router: Router) {}
+  constructor(private jobOffersService: JobOffersService, private dialog: MatDialog, private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
+    const token = this.authService.getToken(); // Assuming you have a method to get the token
+    this.role = this.authService.getRoleFromToken(token ?? ''); // Get the role from the token
     this.loadJobOffers();
   }
+
+
 
   loadJobOffers(): void {
     const observer = {
@@ -105,11 +112,26 @@ export class JobOffersComponent implements OnInit {
     });
   }
 
+  openAddJobSuccessDialog(): void {
+    this.dialog.open(AlertDialogComponent, {
+      data: { title: 'Success', message: 'New job offer added' }
+    });
+  }
+
+  openDeletedJobSuccessDialog(): void{
+    this.dialog.open(AlertDialogComponent, {
+      data: { title: 'Success', message: 'Deleted Job Offer' }
+    });
+  }
+
+
   applySearch(): void {
     this.filteredJobOffers = this.jobOffers.filter(jobOffer =>
       this.getFieldValue(jobOffer, this.filterCriteria).toLowerCase().includes(this.searchText.toLowerCase())
     );
   }
+
+
 
   getFieldValue(jobOffer: JobOffer, field: JobOfferField): string {
     switch (field) {
@@ -143,5 +165,68 @@ export class JobOffersComponent implements OnInit {
       this.currentPage--;
       this.loadJobOffers();
     }
+  }
+
+  editJobOffer(jobOfferId: number): void {
+    // Implementa la logica per editare un'offerta di lavoro
+  }
+
+  deleteJobOffer(jobOfferId: number): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '400px',
+      data: {
+        title: 'Confirm Delete',
+        message: 'Do you want to delete this job offer?',
+        confirmText: 'Delete',
+        cancelText: 'Cancel'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const observer = {
+          next: (response: any) => {
+            console.log('Job offer deleted successfully:', response);
+            this.openDeletedJobSuccessDialog();
+            this.loadJobOffers();
+          },
+          error: (error: any) => {
+            console.error('Error deleting job offer:', error);
+          },
+          complete: () => {
+            console.log('Delete job offer process completed');
+          }
+        };
+        this.jobOffersService.deleteJobOffer(jobOfferId).subscribe(observer);
+      }
+    });
+  }
+
+  addJobOffers(newJobOffer: JobOffer): void {
+
+        this.jobOffersService.addJobOffer(newJobOffer).subscribe({
+          next: (response: JobOffer) => {
+            console.log('Job offer added successfully:', response);
+            this.openAddJobSuccessDialog();
+            this.loadJobOffers();
+          },
+          error: (error: any) => {
+            console.error('Error adding job offer:', error);
+          }
+        });
+  }
+
+  openAddJobOfferDialog(): void {
+    const dialogRef = this.dialog.open(AddJobOfferDialogComponent, {
+      width: '600px', // Imposta la larghezza del dialogo come preferisci
+      data: {} // Eventuali dati da passare al dialogo, se necessario
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // Gestione della chiusura del dialogo e dei dati restituiti
+      if (result) {
+        this.addJobOffers(result); // Chiamata alla funzione addJobOffers con i dati restituiti dal dialogo
+      }
+    });
   }
 }

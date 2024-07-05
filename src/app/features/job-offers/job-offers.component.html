@@ -2,27 +2,27 @@
   <h1 class="page-title">Explore All Available Job Offers</h1>
 
   <div class="search-container">
-    <input
-      type="text"
-      placeholder="Search..."
-      [(ngModel)]="searchText"
-      (input)="applySearch()"
-      class="search-bar"
-    />
-
+    <!-- Barra di ricerca e dropdown -->
+    <input type="text" placeholder="Search..." [(ngModel)]="searchText" (input)="applySearch()" class="search-bar" />
     <span class="clear-search-icon" *ngIf="searchText" (click)="clearSearchText()">
       <mat-icon>highlight_off</mat-icon>
     </span>
-
-
     <select [(ngModel)]="filterCriteria" class="filter-dropdown" (change)="applySearch()">
       <option value="id">ID</option>
       <option value="title">Title</option>
       <option value="location">Location</option>
-      <option value="company">Company</option>
+      <option *ngIf="role === 'CANDIDATE'" value="company">Company</option>
     </select>
+
+    <!-- Pulsante "+" per aggiungere una nuova job offer -->
+    <ng-container *ngIf="role === 'COMPANY'">
+      <button class="add-offer-button" (click)="openAddJobOfferDialog()">
+        +
+      </button>
+    </ng-container>
   </div>
 
+  <!-- Lista delle job offers -->
   <ng-container *ngIf="filteredJobOffers.length > 0; else noJobOffers">
     <ul class="job-offers-list">
       <li *ngFor="let jobOffer of filteredJobOffers" class="job-offer-item">
@@ -34,18 +34,30 @@
           <p class="job-offer-company">Company: {{ jobOffer.company.name }}</p>
           <p class="job-offer-posted">Posted on: {{ jobOffer.posteddate | date }}</p>
           <p class="job-offer-expires">Expires on: {{ jobOffer.expirydate | date }}</p>
-          <button class="apply-button" (click)="applyJobOffer(jobOffer.id)">Apply</button>
+
+          <!-- Azioni in base al ruolo -->
+          <div class="actions-container">
+            <ng-container *ngIf="role === 'CANDIDATE'">
+              <button class="apply-button" (click)="applyJobOffer(jobOffer.id)">Apply</button>
+            </ng-container>
+            <ng-container *ngIf="role === 'COMPANY'">
+              <button class="edit-button" (click)="editJobOffer(jobOffer.id)">Edit</button>
+              <button class="delete-button" (click)="deleteJobOffer(jobOffer.id)">Delete</button>
+            </ng-container>
+          </div>
         </div>
       </li>
     </ul>
 
+    <!-- Paginazione -->
     <div class="pagination">
       <button (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
-      <span>Page {{currentPage + 1}} of {{totalPages}}</span>
+      <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
       <button (click)="nextPage()" [disabled]="currentPage >= totalPages - 1">Next</button>
     </div>
   </ng-container>
 
+  <!-- Nessuna offerta di lavoro disponibile -->
   <ng-template #noJobOffers>
     <p>No Job Offers Available</p>
   </ng-template>

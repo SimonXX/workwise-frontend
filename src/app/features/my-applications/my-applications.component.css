@@ -157,3 +157,27 @@
   font-size: 1em;
   color: #333;
 }
+/* Stile per il pulsante Edit */
+.status-edit-container {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.edit-status-button {
+  background-color: #007bff; /* Colore blu per Edit */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.edit-status-button:hover {
+  background-color: #0056b3; /* Cambio colore al passaggio del mouse */
+}

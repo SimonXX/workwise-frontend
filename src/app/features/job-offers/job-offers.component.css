@@ -168,3 +168,56 @@
   background-color: #45a049;
   transform: scale(1.3);
 }
+.actions-container {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.actions-container .edit-button,
+.actions-container .delete-button {
+  background-color: #4CAF50; /* Colore verde per Edit */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  margin-left: 10px; /* Aggiunto margine sinistro tra i pulsanti */
+}
+
+.actions-container .delete-button {
+  background-color: lightcoral; /* Colore rosso per Delete */
+}
+
+.actions-container .delete-button:hover {
+  background-color: #d00; /* Colore rosso scuro per hover Delete */
+}
+
+.add-offer-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0; /* Rimuovi il padding per centrare correttamente il contenuto */
+  width: 40px; /* Larghezza uguale all'altezza per rendere il pulsante circolare */
+  height: 40px; /* Altezza uguale alla larghezza per rendere il pulsante circolare */
+  border-radius: 50%; /* Imposta il border-radius a 50% per ottenere un cerchio */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  font-size: 24px;
+
+  display: flex; /* Utilizza flexbox per centrare il contenuto */
+  justify-content: center; /* Centra orizzontalmente */
+  align-items: center; /* Centra verticalmente */
+}
+
+.add-offer-button:hover {
+  background-color: #45a049; /* Cambia colore al passaggio del mouse */
+  transform: scale(1.1); /* Ingrandisce leggermente al passaggio del mouse */
+}
+
+

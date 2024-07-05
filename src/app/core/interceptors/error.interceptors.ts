@@ -23,7 +23,10 @@ export class ErrorInterceptor implements HttpInterceptor {
             this.openApplicationExistsDialog();
 
             errorMessage = 'Application already exists for this job offer';
-          } else {
+          } else if(error.status === 409 && error.error.message.toLowerCase().includes('already in use')){
+            this.openEmailExistsDialog();
+          }
+          else {
             errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
           }
         }
@@ -40,6 +43,12 @@ export class ErrorInterceptor implements HttpInterceptor {
   private openApplicationExistsDialog(): void {
     this.dialog.open(AlertDialogComponent, {
       data: { message: 'Application already exists for this job offer' }
+    });
+  }
+
+  private openEmailExistsDialog(): void {
+    this.dialog.open(AlertDialogComponent, {
+      data: { title: 'Error', message: 'Email already exists in this system' }
     });
   }
 }

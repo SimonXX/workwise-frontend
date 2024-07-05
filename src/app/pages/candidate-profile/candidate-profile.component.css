@@ -1,0 +1,224 @@
+.navbar {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa; /* Colore di sfondo più chiaro */
+  padding: 25px 20px; /* Padding interno, più spazio in alto e in basso */
+  display: flex; /* Utilizza flexbox per allineare gli elementi */
+  justify-content: space-between; /* Allinea gli elementi con spazio tra di loro */
+  align-items: center; /* Allinea verticalmente al centro */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra sottile */
+}
+
+/* Stile per il testo del brand */
+.navbar-brand {
+  color: #333; /* Colore testo scuro */
+  font-size: 30px; /* Dimensione del testo aumentata */
+  font-weight: bold; /* Grassetto */
+}
+
+/* Stili per la lista di link nella navbar */
+.navbar-nav {
+  list-style-type: none; /* Rimuove i punti dalla lista */
+  margin: 0; /* Rimuove il margine predefinito */
+  padding: 0; /* Rimuove il padding predefinito */
+  display: flex; /* Utilizza flexbox per allineare gli elementi */
+}
+
+/* Stili per gli elementi della navbar */
+.nav-item {
+  margin-right: 20px; /* Margine a destra aumentato */
+}
+
+/* Stili per i link della navbar */
+.nav-link {
+  color: #555; /* Colore testo più scuro */
+  text-decoration: none; /* Rimuove la sottolineatura dei link */
+  padding: 12px; /* Padding interno aumentato */
+  transition: color 0.3s; /* Transizione del colore al passaggio del mouse */
+}
+
+/* Effetto di hover sui link della navbar */
+.nav-link:hover {
+  color: #007bff; /* Cambio colore al passaggio del mouse verso un blu più vivace */
+  text-decoration: underline; /* Sottolineatura al passaggio del mouse */
+}
+
+/* Stili per il link di Logout */
+.nav-link-logout {
+  color: #dc3545; /* Colore rosso per il Logout */
+  font-weight: bold; /* Grassetto per enfatizzare */
+  transition: color 0.3s; /* Transizione del colore al passaggio del mouse */
+}
+
+/* Effetto di hover sul link di Logout */
+.nav-link-logout:hover {
+  color: #c82333; /* Cambio colore più scuro al passaggio del mouse */
+  text-decoration: underline; /* Sottolineatura al passaggio del mouse */
+}
+
+.profile-wrapper {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 90px); /* Altezza minima meno l'altezza della navbar */
+  background-color: #f0f0f0; /* Colore di sfondo grigio chiaro */
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 800px;
+  padding: 40px;
+  background-color: #ffffff; /* Sfondo bianco */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombra sottile */
+  border-radius: 8px; /* Bordi arrotondati */
+}
+
+.profile-welcome {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-welcome p {
+  font-size: 24px; /* Dimensione del carattere aumentata */
+}
+
+.profile-welcome i {
+  font-style: italic;
+  font-size: 14px;
+  color: #666666;
+  display: block;
+  margin-top: 10px;
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra verticalmente i figli */
+  text-align: center; /* Centra il testo orizzontalmente */
+}
+
+.profile-header h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.profile-header p {
+  color: #777777;
+  font-size: 16px;
+}
+
+.mail-item {
+  display: flex;
+  align-items: center; /* Allinea verticalmente al centro */
+}
+
+.mail-label {
+  margin-right: 10px; /* Margine a destra per separare label e value */
+}
+
+.mail-label i {
+  margin-right: 5px; /* Margine a destra per separare icona e testo */
+}
+
+.profile-details .detail-item {
+  background-color: #f9f9f9; /* Sfondo grigio chiaro delle card */
+  padding: 15px; /* Padding interno */
+  border-radius: 8px; /* Bordi arrotondati */
+  margin-bottom: 15px; /* Spazio tra le card */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Ombra sottile */
+}
+
+.profile-details .detail-label {
+  font-weight: bold;
+}
+
+.profile-details .detail-value {
+  margin-top: 5px; /* Spazio superiore del valore */
+}
+
+.profile-buttons {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.profile-buttons button {
+  margin: 0 10px;
+  padding: 12px 24px; /* Padding pulsante */
+  font-size: 16px; /* Dimensione del carattere */
+  cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+  border: 2px solid #8a2be2; /* Bordo viola */
+  border-radius: 4px; /* Bordi arrotondati */
+  background-color: #ffffff; /* Colore di sfondo bianco */
+  color: #8a2be2; /* Colore testo viola */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transizioni */
+}
+
+.profile-buttons button:hover {
+  background-color: #8a2be2; /* Colore di sfondo viola al passaggio del mouse */
+  color: #ffffff; /* Colore testo bianco al passaggio del mouse */
+}
+
+.btn-info {
+  background-color: #17a2b8; /* Colore di sfondo blu */
+  color: #ffffff; /* Colore testo bianco */
+}
+
+.btn-primary {
+  background-color: #007bff; /* Colore di sfondo blu scuro */
+  color: #ffffff; /* Colore testo bianco */
+}
+
+.btn:hover {
+  opacity: 0.8; /* Opacità al passaggio del mouse */
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.btn {
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.upload-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.upload-btn:hover {
+  background-color: #45a049;
+}
+
+.file-input {
+  display: block;
+  margin: 10px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  transition: border-color 0.3s ease;
+}
+
+.file-input:hover {
+  border-color: #4CAF50;
+}
+
+.cv-download-link {
+  color: #007BFF;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.cv-download-link:hover {
+  color: #0056b3;
+}

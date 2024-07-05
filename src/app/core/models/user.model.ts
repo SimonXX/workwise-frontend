@@ -1,34 +1,35 @@
 import {Role} from "./role.model";
 
-export interface Company {
-  id: number;
-  name: string;
+
+export interface User {
+  firstName: string
+  lastName: string;
   phone: string;
   address: string;
-  website: string;
-  description: string;
+  dateOfBirth: Date;
   createdDate: Date;
+  cvBase64: string;
   role: Role;
 }
 
-export class CompanyImpl implements Company {
-  id: number;
-  name: string;
+export class UserImpl implements User {
+  firstName: string;
+  lastName: string;
   phone: string;
   address: string;
-  website: string;
-  description: string;
+  dateOfBirth: Date;
   createdDate: Date;
+  cvBase64: string;
   role: Role;
 
   constructor() {
-    this.id = 0;
-    this.name = '';
+    this.firstName = '';
+    this.lastName = '';
     this.phone = '';
     this.address = '';
-    this.website = '';
-    this.description = '';
+    this.dateOfBirth = new Date();
     this.createdDate = new Date();
+    this.cvBase64 = '';
     this.role = {
       id: 0,
       name: ''
