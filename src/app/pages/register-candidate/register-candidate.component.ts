@@ -126,4 +126,5 @@ export class RegisterCandidateComponent implements OnInit {
     }
   }
 
+
 }
