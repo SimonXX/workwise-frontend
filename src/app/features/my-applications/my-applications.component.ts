@@ -202,7 +202,6 @@ export class MyApplicationsComponent implements OnInit {
   navigateToProfile(email: string): void {
     console.log(email);
     let viewCompany = true;
-
     this.router.navigate(['/profile'], { queryParams: { email, viewCompany} });
   }
 }

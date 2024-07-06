@@ -19,7 +19,6 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router, private dialog: MatDialog) { }
 
   login(email: string, password: string) {
-    console.log('login auth');
 
     const headers = new HttpHeaders().set('skipInterceptor', '');
 
@@ -32,7 +31,6 @@ export class AuthService {
             localStorage.setItem('token', response.body.token);
             localStorage.setItem('refreshToken', response.body.refreshToken);
             localStorage.setItem('email', email);
-            console.log(localStorage.getItem('token'));
           } else {
             console.error('Invalid login response structure:', response);
             throw new Error('Invalid login response structure');
